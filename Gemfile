@@ -1,6 +1,16 @@
 source 'https://rubygems.org'
 ruby "2.2.1"
 
+#Work with API
+gem 'bandsintown'
+gem 'httparty'
+
+
+#Work with map
+gem 'gmaps4rails'
+gem 'geocoder'
+
+#Authorization for users
 gem 'devise'
 gem "font-awesome-rails"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
