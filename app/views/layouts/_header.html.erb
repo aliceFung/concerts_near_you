@@ -22,7 +22,20 @@
      
  
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Login</a></li>
+        <% if current_user %>
+          
+          <%= button_to 'Sign Out', destroy_user_session_path, 
+                                    class: "btn btn-danger navbar-btn",method: :delete%>
+        <% else %>
+  
+          <%= link_to 'Log In', new_user_session_path, 
+                               class: 'btn btn-success navbar-btn',
+                               method: :get %>
+          <%= link_to 'Sign Up', new_user_registration_path, 
+                               class: 'btn btn-primary navbar-btn',
+                               method: :get %>  
+        
+        <% end %>  
       </ul>
     </div>
   </div>
