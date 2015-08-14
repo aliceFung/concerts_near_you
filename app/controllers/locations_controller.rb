@@ -39,6 +39,7 @@ class LocationsController < ApplicationController
     end
   end
 
+  #by location by IP address, default NYC
   def show
     if request.location
       @location_placeholder = request.location

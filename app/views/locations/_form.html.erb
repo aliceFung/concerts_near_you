@@ -1,8 +1,9 @@
 
-<%= simple_form_for @location do |f| %>
+<%= form_for @location do |f| %>
 
-  <%= f.input :address, placeholder: "New York, NY" %>
+  <%= f.label :address %>
+  <%= f.text_area :address, placeholder: "Enter address here" %>
 
-  <%= f.button "Submit" %>
+  <%= f.submit "Submit" %>
 
 <% end %>
