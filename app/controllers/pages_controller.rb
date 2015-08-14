@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  require 'page'
+  # require 'page'
   require 'pp'
   def index
     #Should keep all events, now just one
