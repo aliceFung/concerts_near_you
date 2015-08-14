@@ -2,6 +2,11 @@ class LocationsController < ApplicationController
 
   def index
     @locations = current_user.locations
+    # if params[:search].present?
+    #   @locations = Location.near(params[:search], 25, :order => :distance)
+    # else
+    #   @locations = Location.all
+    # end
   end
 
   def new
@@ -34,18 +39,22 @@ class LocationsController < ApplicationController
     end
   end
 
-  def destroy
-
+  def show
+    if request.location
+      @location_placeholder = request.location
+    else
+      @location_placeholder = "New York, NY"
+    end
   end
 
-  def show
+  def destroy
 
   end
 
   private
 
   def location_params
-    params.require(:location).permit(:id, :latitude, :logitude)
+    params.require(:location).permit(:id, :address, :latitude, :logitude)
   end
 
 end
