@@ -192,9 +192,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bandsintown
   better_errors
   binding_of_caller
-  bandsintown
   byebug
   coffee-rails (~> 4.1.0)
   devise

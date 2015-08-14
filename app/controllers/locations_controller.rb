@@ -1,21 +1,8 @@
 class LocationsController < ApplicationController
 
-  def index
-    #by location by IP address, default NYC
-    # if request.location
-    #   @location = request.location
-    # else
-    #   @location = "New York, NY"
-    # end
-    @locations = Location.all
-  end
-
-  def new
-    @location = current_user.locations.build
-  end
-
   def create
     @location = current_user.locations.build(location_params)
+    lkjewrwr
     if @location.save
       flash[:success] = "New location created"
       redirect_to locations_path
@@ -25,9 +12,6 @@ class LocationsController < ApplicationController
     end
   end
 
-  def edit
-    @location = current_user.locations.find(params[:id])
-  end
 
   def update
     @location = current_user.locations.find(params[:id])
@@ -40,14 +24,27 @@ class LocationsController < ApplicationController
     end
   end
 
+  ## REMOVE THESE WHEN WE'RE SURE WE DON'T NEED IT ANYMORE
 
-  def show
-    if params[:location].present?
-      @locations = Location.near(params[:location], 25, :order => :distance)
-    else
-      @locations = Location.all
-    end
+  def new
+    @location = current_user.locations.build
   end
+
+  def index
+    @locations = Location.all
+  end
+
+  # def show
+  #   if params[:location].present?
+  #     @locations = Location.near(params[:location], 25, :order => :distance)
+  #   else
+  #     @locations = Location.all
+  #   end
+  # end
+
+  # def edit
+  #   @location = current_user.locations.find(params[:id])
+  # end
 
   private
 

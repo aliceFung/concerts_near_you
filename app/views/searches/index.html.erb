@@ -1,19 +1,18 @@
 <%= form_tag searches_path, method: :get do %>
 
   <%= search_field_tag :address, nil,
-                                placeholder: @location %>
+                                placeholder: @placeholder %>
   <%= search_field_tag :artist, nil,
                                 placeholder: "Enter Artist" %>
 
   <%= submit_tag "Submit", class: "btn btn-default" %>
 <% end %>
-@location = <%=@location%>
 
 <section class = "container" id="search-section">
   <div class="row">
       <br>
       <p class="col-md-10-2 text-center">
-        Showing <%= @matches.size if @matches %> results for
+        Showing <%= @locations.size if @locations %> results for
           "<%= params[:artist] %>" near "<%= params[:address] %>"
       </p>
     <header>
@@ -25,7 +24,16 @@
 
     <div class="col-md-10 col-md-offset-1" id="friends-section">
       <!-- list all existing matches below -->
-      <%= @matches %>
+      <table>
+        <tr>
+          <th>id </th>
+          <th>address </th>
+          <th>latitude </th>
+          <th>longitude </th>
+          <th>user_id </th>
+        </tr>
+          <%= render @locations %>
+      </table>
     </div>
 
   </div>

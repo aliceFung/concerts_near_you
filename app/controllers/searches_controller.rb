@@ -2,11 +2,18 @@ class SearchesController < ApplicationController
 
   def index
     if request.location && request.location.address != "Reserved"
-      @location = request.location
+      @placeholder = request.location
     else
-      @location = "New York, NY"
+      @placeholder = "New York, NY"
     end
-    @matches = params
+    if params[:address].present?
+      ##nearbys searches w/i the mile given for geocoded Location objs
+      # @locations = params[:search].nearbys(5)
+      coordinates = Geocoder.coordinates(params[:address])
+      @locations = Location.near(coordinates)
+    else
+      @locations = Location.near(@placeholder)
+    end
   end
 
 end
