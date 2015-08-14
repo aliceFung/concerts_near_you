@@ -1,0 +1,14 @@
+<table>
+
+  <tr>
+    <th>id </th>
+    <th>address </th>
+    <th>latitude </th>
+    <th>longitude </th>
+    <th>user_id </th>
+  </tr>
+
+  <%= render @locations %>
+</table>
+
+<%= link_to "add new location", new_location_path %>

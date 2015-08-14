@@ -1,0 +1,35 @@
+<%= form_tag searches_path, method: :get do %>
+
+  <%= search_field_tag :address, nil,
+                                placeholder: @location %>
+  <%= search_field_tag :artist, nil,
+                                placeholder: "Enter Artist" %>
+
+  <%= submit_tag "Submit", class: "btn btn-default" %>
+<% end %>
+@location = <%=@location%>
+
+<section class = "container" id="search-section">
+  <div class="row">
+      <br>
+      <p class="col-md-10-2 text-center">
+        Showing <%= @matches.size if @matches %> results for
+          "<%= params[:artist] %>" near "<%= params[:address] %>"
+      </p>
+    <header>
+      <div class="col-xs-offset-2 col-xs-8">
+        <h2>Search Results</h2>
+      </div>
+    </header>
+    <!--search results-->
+
+    <div class="col-md-10 col-md-offset-1" id="friends-section">
+      <!-- list all existing matches below -->
+      <%= @matches %>
+    </div>
+
+  </div>
+
+</section>
+
+  <br>

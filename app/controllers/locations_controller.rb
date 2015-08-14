@@ -1,12 +1,13 @@
 class LocationsController < ApplicationController
 
   def index
-    @locations = current_user.locations
-    # if params[:search].present?
-    #   @locations = Location.near(params[:search], 25, :order => :distance)
+    #by location by IP address, default NYC
+    # if request.location
+    #   @location = request.location
     # else
-    #   @locations = Location.all
+    #   @location = "New York, NY"
     # end
+    @locations = Location.all
   end
 
   def new
@@ -17,7 +18,7 @@ class LocationsController < ApplicationController
     @location = current_user.locations.build(location_params)
     if @location.save
       flash[:success] = "New location created"
-      redirect to user_path(current_user)
+      redirect_to locations_path
     else
       flash[:error] = "Location wasn't saved. :("
       render :new
@@ -39,17 +40,13 @@ class LocationsController < ApplicationController
     end
   end
 
-  #by location by IP address, default NYC
+
   def show
-    if request.location
-      @location_placeholder = request.location
+    if params[:location].present?
+      @locations = Location.near(params[:location], 25, :order => :distance)
     else
-      @location_placeholder = "New York, NY"
+      @locations = Location.all
     end
-  end
-
-  def destroy
-
   end
 
   private

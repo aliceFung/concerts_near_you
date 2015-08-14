@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150814160128) do
 
   create_table "locations", force: :cascade do |t|
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.string   "address"
     t.float    "latitude"
     t.float    "longitude"
