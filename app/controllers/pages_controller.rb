@@ -37,5 +37,40 @@ class PagesController < ApplicationController
     end
   end
 
+  def first_events_for_map
+    response_row = HTTParty.get("http://api.bandsintown.com/events/search.json?location=#{city_state_for_index_info}")
+    response_json = JSON.parse(response_row.response.body)
+    response_json.events
+  end
+
+  def city_state_for_index_info
+    if address_from_ip
+      city = request.location.city
+      state = request.location.state
+      return "#{city},#{state}"
+    else
+      return "Boston,MA"
+    end
+  end
+
+  def events
+    events = []
+    self.response_json.each do |event|
+      lat = event["venue"]["latitude"]
+      lon = event["venue"]["longitude"]
+      if event["artists"].size == 1
+        artist = event["artists"].first["name"]
+      else
+        artist=[]
+        event["artists"].each{|art| artist<<art["name"]}
+      end
+      venue = event["venue"]["name"]
+      description = "Concert"
+      datetime = event["datetime"]
+
+      events << Event.new(lat,lon,artist,description,venue,datetime)
+    end
+    events
+  end
 
 end

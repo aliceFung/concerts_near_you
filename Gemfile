@@ -53,15 +53,19 @@ gem 'simple_form'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
- gem 'sqlite3'
+  gem 'sqlite3'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  #for error handling
+  #For error handling
   gem 'better_errors'
   gem 'binding_of_caller'
+
+  #For testing
+  gem 'rspec-rails'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
