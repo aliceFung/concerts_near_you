@@ -11,6 +11,8 @@
 <hr>
 
 <br>
+<% unless @events[0]=="error" %>
+
 <div class="row">
   <div class="col-sm-12">
     <h3 class="text-center">
@@ -20,14 +22,17 @@
   </div>
 </div>
 <br>
-
+<% end %>
 <!-- map display with result markers here -->
 
 <%= render partial: 'shared/map_results', locals: {hash: @hash} %>
 <br>
 
 <!-- display results -->
-<div class="col-md-10 col-md-offset-1">
-  <!-- list all existing matches below -->
-  <%= render partial: 'shared/events', locals: {events: @events} %>
-</div>
+<br>
+<% unless @events[0]=="error"%>
+  <div class="col-md-10 col-md-offset-1">
+    <!-- list all existing matches below -->
+    <%= render partial: 'shared/events', locals: {events: @events} %>
+  </div>
+<% end %>

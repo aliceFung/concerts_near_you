@@ -12,10 +12,10 @@ class MapList
     end
   end
 
-  def self.no_results
-      # Alice put here lat and lon from IP location
+  def self.no_results(lat, lon)
+     
      #For NY 40.748817, and the longitude is -73.985428
-    events=Event.new("40.748817","-73.985428", "You are here", "Specify City, State", "Check that location has right spelling", "Try it now!")
+    events=Event.new(lat,lon, "You were looking here", "Specify City, State", "Check that location has right spelling", "Try it now!")
     self.map_markers(events)
   end
 end

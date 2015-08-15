@@ -16,8 +16,8 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
+        <li> <%= link_to "Home", root_path %></li>
+        
         <% if current_user %>
           <li><%= link_to 'Profile' , profile_path(current_user.profile.id) %></li>
         <% end %>
