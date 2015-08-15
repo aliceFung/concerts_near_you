@@ -21,10 +21,5 @@ class ProfilesController < ApplicationController
     end
   end
 
-  private
-
-  def whitelisted_user_params
-    params.require(:profile).permit(:id, :frequency)
-  end
 
 end

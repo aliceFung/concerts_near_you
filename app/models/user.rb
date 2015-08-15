@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_one :profile
   has_many :favorites
   has_many :artists, through: :favorites
+  has_one :news_time
 
   #=================== methods ======================
 
