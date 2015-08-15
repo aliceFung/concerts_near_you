@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815193615) do
+ActiveRecord::Schema.define(version: 20150815211017) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name",       null: false
@@ -81,6 +81,13 @@ ActiveRecord::Schema.define(version: 20150815193615) do
 
   add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id"
   add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "news_timers", force: :cascade do |t|
+    t.datetime "mailed_at",  default: '2015-08-16 21:15:09', null: false
+    t.integer  "user_id"
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "frequency"

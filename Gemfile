@@ -20,6 +20,8 @@ gem 'omniauth-facebook'
 
 #mailer
 gem 'delayed_job_active_record'
+gem 'delayed_job'
+gem 'clockwork'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
