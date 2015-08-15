@@ -2,7 +2,7 @@ class LocationsController < ApplicationController
 
   def create
     @location = current_user.locations.build(location_params)
-    lkjewrwr
+ 
     if @location.save
       flash[:success] = "New location created"
       redirect_to locations_path
