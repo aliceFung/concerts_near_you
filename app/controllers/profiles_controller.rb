@@ -13,8 +13,5 @@ class ProfilesController < ApplicationController
       marker.infowindow event["artists"][0]["name"] + " ---> " + event["venue"]["name"]+ '<br>' + event["description"] +'<br>'+ event["formatted_datetime"]
     end
   end
-  
-  def create
-    SendEmailJob.set(wait: 20.seconds).perform_later(@user)
-  end
+
 end
