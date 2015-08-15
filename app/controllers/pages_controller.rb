@@ -19,8 +19,10 @@ class PagesController < ApplicationController
       end
       #When API return errors messages
       if @events[0]=="error" #work for Last.new(@origin)
-        flash[:failure]=@events[1]
-        @hash = MapList.no_results
+        flash.now[:failure]=@events[1]
+        coord = coordinates(address_for_query)
+        @hash = MapList.no_results(coord[0], coord[1])
+        
       else
         @hash = MapList.map_markers(@events)
       end
