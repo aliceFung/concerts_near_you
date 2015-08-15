@@ -1,9 +1,9 @@
-class Last
+class Test
   attr_reader :response_json
   def initialize(location)
 
     #Request
-    response_row = HTTParty.get("http://ws.audioscrobbler.com/2.0/?method=geo.getevents&location=#{location}&api_key=1fd1c9089ad4d4f2107e8376001a87c9&format=json")
+    response_row = HTTParty.get("http://api.bandsintown.com/events/search.json?location=#{location}")
     #Response
     @response_json = JSON.parse(response_row.response.body)
 
@@ -11,20 +11,20 @@ class Last
   
   def events
     events = []
-    if self.response_json["error"].nil?
-      self.response_json["events"]["event"].each do |event|
-        lat = event["venue"]["location"]["geo:point"]["geo:lat"]
-        lon = event["venue"]["location"]["geo:point"]["geo:long"]
-        artist = event["artists"]["artist"]
-        venue = event["venue"]["name"]
-        description = event["title"]
-        datetime = event["startDate"]
-
-        events << Event.new(lat,lon,artist,description,venue,datetime)
+    self.response_json.each do |event|
+      lat = event["venue"]["latitude"]
+      lon = event["venue"]["longitude"]
+      if event["artists"].size == 1
+        artist = event["artists"].first["name"]
+      else
+        artist=[]
+        event["artists"].each{|art| artist<<art["name"]}
       end
-    else
-      events << "error"
-      events << self.response_json["message"]
+      venue = event["venue"]["name"]
+      description = "Concert"
+      datetime = event["datetime"]
+
+      events << Event.new(lat,lon,artist,description,venue,datetime)
     end
     events
   end

@@ -1,33 +1,35 @@
 
 
-<div class="jumbotron text-center">
-  <h1 class="new-cycle">Welcome to Team 3's web app</h1>
+  <h4 class="text-center">Welcome to Team 3's web app</h4>
   <br>
 
   <!-- search form here -->
   <%= render partial: 'shared/search_field' %>
 
-</div>
+
+
 
 <hr>
-
 
 <br>
 <div class="row">
   <div class="col-sm-12">
-    <h3 class="text-center">
-      Showing <%= @events.size if @events %> results
-      <%= "for #{@artist} near #{@origin}" %>
-    </h3>
+      <h3 class="text-center">
+        <% unless flash %>
+          Showing <%= @events.size if @events %> results
+          <%= "for #{@artist} near #{@origin}" %>
+        <% end %>
+      </h3>
   </div>
 </div>
 <br>
-<br>
+
 
   <!-- map display with result markers here -->
 <%= render partial: 'shared/map_results', locals: {hash: @hash} %>
-
-<div class="col-md-10 col-md-offset-1">
-  <!-- list all existing matches below -->
-  <%= render partial: 'shared/events', locals: {events: @events} %>
-</div>
+<% unless flash %>
+  <div class="col-md-10 col-md-offset-1">
+    <!-- list all existing matches below -->
+    <%= render partial: 'shared/events', locals: {events: @events} %>
+  </div>
+<% end %>

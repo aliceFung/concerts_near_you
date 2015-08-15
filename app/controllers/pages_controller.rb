@@ -17,7 +17,13 @@ class PagesController < ApplicationController
         #First option
         @events = Bands.new(@artist, @origin).events
       end
-      @hash = MapList.map_markers(@events)
+      #When API return errors messages
+      if @events[0]=="error" #work for Last.new(@origin)
+        flash[:failure]=@events[1]
+        @hash = MapList.no_results
+      else
+        @hash = MapList.map_markers(@events)
+      end
     end
   end
 
@@ -46,6 +52,13 @@ class PagesController < ApplicationController
     end
   end
 
+
+  def first_events_for_map
+    response_row = HTTParty.get("http://api.bandsintown.com/events/search.json?location=#{city_state_for_index_info}")
+    response_json = JSON.parse(response_row.response.body)
+    response_json.events
+  end
+
   def address_for_query
     if params[:address].blank?
       location = address_from_ip
@@ -69,6 +82,27 @@ class PagesController < ApplicationController
     else
       return "Boston,MA"
     end
+  end
+
+
+  def events
+    events = []
+    self.response_json.each do |event|
+      lat = event["venue"]["latitude"]
+      lon = event["venue"]["longitude"]
+      if event["artists"].size == 1
+        artist = event["artists"].first["name"]
+      else
+        artist=[]
+        event["artists"].each{|art| artist<<art["name"]}
+      end
+      venue = event["venue"]["name"]
+      description = "Concert"
+      datetime = event["datetime"]
+
+      events << Event.new(lat,lon,artist,description,venue,datetime)
+    end
+    events
   end
 
 
