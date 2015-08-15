@@ -1,4 +1,4 @@
-class Bands
+class BandEvent
   attr_accessor :response
 
   # base_uri "http://api.bandsintown.com/artists"
@@ -10,7 +10,7 @@ class Bands
     @name = name
     @location = location
     #@options = { :query => { :name => name} }
-    #For artist by name search 
+    #For artist by name search
     #response_row = HTTParty.get("http://api.bandsintown.com/artists/#{name}.json?api_version=2.0&app_id=practice")
 
     response_row = HTTParty.get("http://api.bandsintown.com/artists/#{name}/events/search.json?api_version=2.0&app_id=YOUR_APP_ID&location=#{location}&radius=10")
@@ -46,7 +46,7 @@ class Bands
   def description
     @response[0]["description"]
   end
-  
+
 
 
 end

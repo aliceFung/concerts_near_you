@@ -1,9 +1,14 @@
 class PagesController < ApplicationController
-  require 'page'
-  require 'pp'
+
   def index
-    #Should keep all events, now just one
-    @events = Bands.new('Madonna','New York').all
+    if params[:address].present? || address_from_ip
+      coordinates = Geocoder.coordinates(params[:address])
+      @locations = Location.near(coordinates)
+    else
+      @locations = Location.near(@placeholder)
+    end
+
+    @events = BandEvent.new('Madonna','New York').all
 
     #Should get a location here with latitude and longitude
     # latitude=40.748817
@@ -15,8 +20,8 @@ class PagesController < ApplicationController
     end
   end
 
-  def create 
-    #grab a query from search form, 
+  def create
+    #grab a query from search form,
     # => if no location given grab geo location, if not found set default New York
     # => if no name specified give a 'Madonna' name for now we can't grab all events for a location
     #if no events found show "No event for this artist in this area are known"
@@ -24,5 +29,13 @@ class PagesController < ApplicationController
     #redirect_to root
   end
 
-  
+  private
+
+  def address_from_ip
+    if request.location && request.location.address != "Reserved"
+        @placeholder = request.location
+    end
+  end
+
+
 end
