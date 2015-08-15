@@ -1,16 +1,12 @@
 
 
-<div class="jumbotron text-center">
-  <h1 class="new-cycle">Welcome to Team 3's web app</h1>
-  <br>
+<div class="text-center">
 
-  <!-- search form here -->
   <%= render partial: 'shared/search_field' %>
 
 </div>
 
 <hr>
-
 
 <br>
 <div class="row">
@@ -20,14 +16,17 @@
       <%= "for #{@artist} near #{@origin}" %>
     </h3>
   </div>
+</div>
+<br>
+
+  <!-- map display with result markers here -->
+<%= render partial: 'shared/map_results', locals: {hash: @hash} %>
+<br>
+
+<div class="row">
   <div class="col-sm-8 col-sm-offset-2">
     <div style='width: 800px;'>
       <div id="map" style='width: 800px; height: 400px;'></div>
     </div>
   </div>
 </div>
-<br>
-<br>
-
-  <!-- map display with result markers here -->
-<%= render partial: 'shared/map_results', locals: {hash: @hash} %>

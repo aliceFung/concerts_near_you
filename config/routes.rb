@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   resources :locations, only: [:create, :destroy]
 
-  # resources :searches, only: [:index]
+  resource :search, only: [:show]
 
 end
