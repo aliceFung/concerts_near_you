@@ -27,8 +27,8 @@ class FavoritesController < ApplicationController
   private
 
   def params_list
-    params.require(:favorite).permit(:id, :artist_id)
-    Favorite.find_artist(params[:artist_name])
+    params.require(:favorite).permit(:id, :artist_name, :artist_id)
+    params[:artist_name].downcase.strip!
   end
 
 
