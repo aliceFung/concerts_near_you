@@ -1,10 +1,9 @@
-class Bands
 
+class Bands
   attr_reader :response_json
 
+
   def initialize(name, location)
-    @name = name
-    @location = location
 
     response_row = HTTParty.get("http://api.bandsintown.com/artists/#{name}/events/search.json?api_version=2.0&app_id=YOUR_APP_ID&location=#{location}&radius=10")
 
@@ -26,6 +25,7 @@ class Bands
     end
     events
   end
+
 
 
 end

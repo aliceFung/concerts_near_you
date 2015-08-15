@@ -1,0 +1,121 @@
+<h1 class="text-center page-header">Your Personal Preferences</h1>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title"> Artists you are tracking:</h3>
+      </div>
+      <div class="panel-body">
+        <div class="list-group">
+          <a href="#" class="list-group-item  ">
+            Cras justo odio
+          </a>
+          <a href="#" class="list-group-item">Dapibus ac facilisis in
+          </a>
+          <a href="#" class="list-group-item">Morbi leo risus
+          </a>
+        </div>
+        <div class="form-group">
+          <input class="form-control" id="focusedInput" type="text" value=" Add Artist">
+          <br>
+          <a href="#" class="btn btn-primary btn-block">Add Artist</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Locations to track artists in:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li>Cras justo odio</li>
+          <li>Dapibus ac facilisis in</li>
+          <li>Morbi leo risus</li>
+        </ul>
+        <div class="form-group">
+          <input class="form-control" id="focusedInput" type="text" value=" Add Area">
+          <br>
+          <a href="#" class="btn btn-primary btn-block">Add Area</a>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Notification:</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label class="control-label" for="focusedInput">Email to use</label>
+          <input class="form-control" id="focusedInput" type="text" value="current email">
+
+        </div>
+        Email frequency: 
+        <select class="form-control" id="select">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+        <br>
+        <a href="#" class="btn btn-primary btn-block"> Update Email</a>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-sm-8">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+        <div style='width: 600px; border: solid 1px black;'>
+          <div id="map" style='width: 800px; height: 400px;'></div>
+        </div>
+      </div>
+ 
+
+      <div class="col-sm-8 col-sm-offset-2">
+
+      <% @events.each do |event| %>
+
+
+      <br>
+      <br>
+
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">   Artist <%=  event["artists"][0]["name"]%></h3>
+        </div>
+        <div class="panel-body">
+
+         <br>
+         Where <%= event["venue"]["name"] %>
+         <br>
+         When <%= event["formatted_datetime"] %>
+         <br>
+         What <%= event["description"] %>
+
+       </div>
+     </div>
+     <% end %>
+     </div>
+   </div>
+ </div>
+ <br>
+
+
+</div>
+
+</div>
+
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+</script>

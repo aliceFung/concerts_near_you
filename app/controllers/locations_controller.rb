@@ -2,37 +2,37 @@ class LocationsController < ApplicationController
 
   def create
     @location = current_user.locations.build(location_params)
- 
+
     if @location.save
       flash[:success] = "New location created"
-      redirect_to locations_path
+      redirect to user_path(current_user)
     else
       flash[:error] = "Location wasn't saved. :("
-      render :new
+      redirect to user_path(current_user)
     end
   end
 
 
-  def update
+  def destroy
     @location = current_user.locations.find(params[:id])
-    if current_user.id == @location.user_id && @location.save
-      flash[:success] = "Location updated"
+    if current_user.id == @location.user_id && @location.destroy
+      flash[:success] = "Location deleted"
       redirect to user_path(current_user)
     else
       flash[:error] = "Location not updated. :("
-      render :edit
+      redirect to user_path(current_user)
     end
   end
 
   ## REMOVE THESE WHEN WE'RE SURE WE DON'T NEED IT ANYMORE
 
-  def new
-    @location = current_user.locations.build
-  end
+  # def new
+  #   @location = current_user.locations.build
+  # end
 
-  def index
-    @locations = Location.all
-  end
+  # def index
+  #   @locations = Location.all
+  # end
 
   # def show
   #   if params[:location].present?
