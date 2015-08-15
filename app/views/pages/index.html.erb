@@ -20,14 +20,14 @@
       <%= "for #{@artist} near #{@origin}" %>
     </h3>
   </div>
-  <div class="col-sm-8 col-sm-offset-2">
-    <div style='width: 800px;'>
-      <div id="map" style='width: 800px; height: 400px;'></div>
-    </div>
-  </div>
 </div>
 <br>
 <br>
 
   <!-- map display with result markers here -->
 <%= render partial: 'shared/map_results', locals: {hash: @hash} %>
+
+<div class="col-md-10 col-md-offset-1">
+  <!-- list all existing matches below -->
+  <%= render partial: 'shared/events', locals: {events: @events} %>
+</div>
