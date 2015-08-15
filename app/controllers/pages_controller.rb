@@ -3,8 +3,8 @@ class PagesController < ApplicationController
 
   def index
      @client_ip = remote_ip
-    if current_user
-      @events = current_user.user_interest_events
+    if current_user && current_user.info?(current_user)
+      @events = current_user.user_interest_events(current_user)
     # elsif params[:address].blank? && params[:artist].blank?
     # # Mike mentioned about location specific other info
     else
@@ -24,9 +24,13 @@ class PagesController < ApplicationController
 
   private
 
+  def locate_by_ip
+    request.location
+  end
+
   def address_from_ip
-    if request.location && request.location.address != "Reserved"
-        return request.location.address
+    if locate_by_ip && locate_by_ip.address != "Reserved"
+        return locate_by_ip.address
     end
   end
 
@@ -47,10 +51,15 @@ class PagesController < ApplicationController
     end
   end
 
+  #yields coordinates in format [42.700149, -74.922767]
+  def coordinates(address_str)
+    Geocoder.coordinates(address_str)
+  end
+
   def city_state_for_index_info
     if address_from_ip
-      city = request.location.city
-      state = request.location.state
+      city = locate_by_ip.city
+      state = locate_by_ip.state
       return "#{city},#{state}"
     else
       return "Boston,MA"
