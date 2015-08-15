@@ -1,7 +1,11 @@
 class FavoritesController < ApplicationController
 
   def create
-    favorite = current_user.favorites.build(params_list)
+  
+    
+    artist_id = Artist.name_to_id(params[:favorite][:artist_name])
+    
+    favorite = current_user.favorites.build(artist_id:  artist_id)
 
     if favorite.save
       flash[:success] = "New music favorite added to your list."
