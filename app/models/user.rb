@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :omniauthable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  after_create :build_profile, :if => Proc.new{ self.profile.nil? }
   #=================== associations ======================
 
   has_many :locations
@@ -20,7 +21,7 @@ class User < ActiveRecord::Base
 
         current_user.artists.each do |artist|
           #Need to add events from Last too
-         events += Bands.new(artist, location).events
+         events += Bands.new(artist.name, location.address).events
         end
 
       end

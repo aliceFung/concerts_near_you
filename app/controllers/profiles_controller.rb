@@ -1,14 +1,30 @@
 class ProfilesController < ApplicationController
 
-  def index
-
+  def show
+    @profile = current_user.profile
+    @favorites = current_user.favorites
+    @favorite = Favorite.new
+    @locations = current_user.locations
+    @location = Location.new
     @events = Bands.new('Madonna','New York').events
-
     @hash = MapList.map_markers(@events)
-
   end
 
-  # def index
+  def update
+    @profile = current_user.profile
+    if @profile.update(whitelisted_user_params)
+      flash[:success] = "Successfully updated your profile"
+      redirect_to user_profile_path(current_user)
+    else
+      flash.now[:failure] = "Failed to update your profile"
+      render :edit
+    end
+  end
 
-  # end
+  private
+
+  def whitelisted_user_params
+    params.require(:profile).permit(:id, :frequency)
+  end
+
 end

@@ -15,6 +15,7 @@ class Bands
   def events
     events = []
     self.response_json.each do |event|
+      break if event[0] == "errors"
       lat = event["venue"]["latitude"]
       lon = event["venue"]["longitude"]
       artist = event["artists"][0]["name"]
@@ -28,7 +29,7 @@ class Bands
   end
 
   def artist_default(input)
-    if input.nil? || input.empty?
+    if input.nil?
       return 'Madonna'
     else
       return input

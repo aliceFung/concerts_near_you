@@ -1,8 +1,9 @@
 
 
+
   <div class="row col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-3">
     <div class="navbar-form navbar-left" role="search" >
-      
+
       <%= form_tag search_path, method: :get do %>
       <%= search_field_tag :address, nil,
       placeholder: "Enter Location", class: "form-control"%>
@@ -12,5 +13,5 @@
       <%= submit_tag "Search", class: "btn btn-success" %>
       <% end %>
 
-    </div>
   </div>
+</div>

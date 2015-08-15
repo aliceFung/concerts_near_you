@@ -7,18 +7,15 @@
       </div>
       <div class="panel-body">
         <div class="list-group">
-          <a href="#" class="list-group-item  ">
-            Cras justo odio
-          </a>
-          <a href="#" class="list-group-item">Dapibus ac facilisis in
-          </a>
-          <a href="#" class="list-group-item">Morbi leo risus
-          </a>
-        </div>
+          <%= render @favorites %>
+
         <div class="form-group">
-          <input class="form-control" id="focusedInput" type="text" value=" Add Artist">
+          <%= form_for @favorite do |f| %>
+          <%= f.text_field :artist_name, class: "form-control",
+                 id:"focusedInput", value: "Add Artist" %>
           <br>
-          <a href="#" class="btn btn-primary btn-block">Add Artist</a>
+          <%= f.submit "Add Artist", class: "btn btn-primary btn-block" %>
+          <% end %>
         </div>
 
       </div>
@@ -30,14 +27,16 @@
       </div>
       <div class="panel-body">
         <ul>
-          <li>Cras justo odio</li>
-          <li>Dapibus ac facilisis in</li>
-          <li>Morbi leo risus</li>
+          <%= render @locations %>
         </ul>
         <div class="form-group">
-          <input class="form-control" id="focusedInput" type="text" value=" Add Area">
+          <%= form_for @location do |f| %>
+          <%= f.text_field :address, class: "form-control",
+                 id:"focusedInput", value: "Add Area" %>
           <br>
-          <a href="#" class="btn btn-primary btn-block">Add Area</a>
+          <br>
+          <%= f.submit "Add Area", class: "btn btn-primary btn-block" %>
+          <% end %>
         </div>
       </div>
 
@@ -48,20 +47,16 @@
       </div>
       <div class="panel-body">
         <div class="form-group">
+          <%= form_for @profile do |f| %>
           <label class="control-label" for="focusedInput">Email to use</label>
           <input class="form-control" id="focusedInput" type="text" value="current email">
 
         </div>
         Email frequency:
-        <select class="form-control" id="select">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <%= f.select(:frequency, [1,7,14,21,30], include_blank: true, class: "form-control" )%>
         <br>
-        <a href="#" class="btn btn-primary btn-block"> Update Email</a>
+        <%= f.submit "Update Email",  class: "btn btn-primary btn-block" %>
+        <% end %>
       </div>
 
     </div>
