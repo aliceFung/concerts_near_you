@@ -17,6 +17,10 @@ gem 'figaro'
 gem 'devise'
 gem "font-awesome-rails"
 gem 'omniauth-facebook'
+
+#mailer
+gem 'delayed_job_active_record'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use SCSS for stylesheets
