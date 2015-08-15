@@ -13,9 +13,9 @@ class User < ActiveRecord::Base
 
   #=================== methods ======================
 
-  def user_interest_events
+  def user_interest_events(current_user)
     events = []
-    if current_user.locations.any? && current_user.artists.any?
+    if info?(current_user)
       current_user.locations.each do |location|
 
         current_user.artists.each do |artist|
@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
       end
     end
     events
+  end
+
+  def info?(user)
+    user.locations.any? && user.artists.any?
   end
 
   def self.from_omniauth(auth)
