@@ -3,33 +3,40 @@
 <script src='//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js' type='text/javascript'></script>
 
 <div class="jumbotron text-center">
-  <h1 class="abril-text">Welcome to Team 3's new web app</h1>
-  <p>Coming soon.</p>
-</div>
-<!-- search form here -->
-<%= form_tag root_path, method: :get do %>
+  <h1 class="new-cycle">Welcome to Team 3's web app</h1>
+  <br>
+  <%= form_tag root_path, method: :get do %>
 
   <%= search_field_tag :address, nil,
-                                placeholder: "Enter Location"%>
+  placeholder: "Enter Location"%>
   <%= search_field_tag :artist, nil,
-                                placeholder: "Enter Artist" %>
+  placeholder: "Enter Artist" %>
 
   <%= submit_tag "Submit", class: "btn btn-default" %>
-<% end %>
+  <% end %>
+
+</div>
+<!-- search form here -->
 
 <hr>
 
-  <h3>
-    Showing <%= @events.size if @events %> results
-    <%= "for #{params[:artist]} near #{params[:address]}" %>
-  </h3>
 
-
-  <br>
-
-  <div style='width: 800px;'>
-    <div id="map" style='width: 800px; height: 400px;'></div>
+<br>
+<div class="row">
+  <div class="col-sm-12">
+    <h3 class="text-center">
+      Showing <%= @events.size if @events %> results
+      <%= "for #{params[:artist]} near #{params[:address]}" %>
+    </h3>
   </div>
+  <div class="col-sm-8 col-sm-offset-2">
+    <div style='width: 800px;'>
+      <div id="map" style='width: 800px; height: 400px;'></div>
+    </div>
+  </div>
+</div>
+<br>  
+<br>
 <script type="text/javascript">
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
