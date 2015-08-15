@@ -52,7 +52,7 @@
           <input class="form-control" id="focusedInput" type="text" value="current email">
 
         </div>
-        Email frequency: 
+        Email frequency:
         <select class="form-control" id="select">
           <option>1</option>
           <option>2</option>
@@ -74,7 +74,7 @@
           <div id="map" style='width: 800px; height: 400px;'></div>
         </div>
       </div>
- 
+
 
       <div class="col-sm-8 col-sm-offset-2">
 
@@ -87,16 +87,16 @@
 
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">   Artist <%=  event["artists"][0]["name"]%></h3>
+          <h3 class="panel-title">   Artist <%=  event.artist%></h3>
         </div>
         <div class="panel-body">
 
          <br>
-         Where <%= event["venue"]["name"] %>
+         Where <%= event.venue %>
          <br>
-         When <%= event["formatted_datetime"] %>
+         When <%= event.datetime %>
          <br>
-         What <%= event["description"] %>
+         What <%= event.description %>
 
        </div>
      </div>
