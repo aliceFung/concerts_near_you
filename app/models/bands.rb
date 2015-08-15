@@ -4,6 +4,7 @@ class Bands
 
 
   def initialize(name, location)
+    name = artist_default(name)
 
     response_row = HTTParty.get("http://api.bandsintown.com/artists/#{name}/events/search.json?api_version=2.0&app_id=YOUR_APP_ID&location=#{location}&radius=10")
 
@@ -26,6 +27,13 @@ class Bands
     events
   end
 
+  def artist_default(input)
+    if input.nil? || input.empty?
+      return 'Madonna'
+    else
+      return input
+    end
+  end
 
 
 end
