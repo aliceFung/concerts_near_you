@@ -2,7 +2,6 @@ class MapList
 
   #just makes markers for map
   def self.map_markers(events)
-
     m_markers = Gmaps4rails.build_markers(events) do |event, marker|
       #event.latitude
       marker.lat  event["venue"]["latitude"]

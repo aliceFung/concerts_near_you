@@ -8,6 +8,7 @@ class PagesController < ApplicationController
       @origin ||= address_from_ip
       @events = BandEvent.new(params[:artist], @origin).all
       @hash = MapList.map_markers(@events)
+      # @hash = MapList.no_event_location(params[:address]) if @events.empty?
     end
   end
 
