@@ -2,7 +2,7 @@ class ProfilesController < ApplicationController
 
   def index
     #Should keep all events, now just one
-    @events = Bands.new('Madonna','New York').all
+    @events = Bands.new('Madonna','New York').events
 
     #Should get a location here with latitude and longitude
     # latitude=40.748817
