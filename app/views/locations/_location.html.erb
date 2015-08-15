@@ -1,7 +1,4 @@
-<tr>
-  <td><%= location.id %> |</td>
-  <td><%= location.address %> |</td>
-  <td><%= location.latitude %> |</td>
-  <td><%= location.longitude %> |</td>
-  <td><%= location.user_id %></td>
-</tr>
+<li>
+<%= link_to location.address,
+    search_path(address: location.address) %>
+<%= link_to "Delete", location_path(location), method: :delete, class: "pull-right" %> </li>

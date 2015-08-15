@@ -5,14 +5,16 @@ class Favorite < ActiveRecord::Base
   belongs_to :artist
   belongs_to :user
 
-  #===================== callbacks ===================
-  # before_create :check_artist #, :if => Proc.new{ self.artist.nil? }
+  # #===================== callbacks ===================
+  # before_create :check_artist(params[:])
+
+  validates :user_id, :artist_id, presence: true
 
   #===================== methods ===================
 
   #virtual attribute writer
   def artist_name=(artist_name)
-    self.artist = Artist.name_to_id unless artist_name.nil?
+    self.artist_id = Artist.name_to_id(artist_name) unless artist_name.nil?
   end
 
   #virtual attribute reader
@@ -20,10 +22,10 @@ class Favorite < ActiveRecord::Base
     self.artist.name
   end
 
-  def check_artist(params[:artist_name])
-    if params[:artist_name]
-      return Artist.name_to_id(params[:artist_name])
-    end
-  end
+  # def check_artist(input)
+  #   if input
+  #     Artist.name_to_id(input)
+  #   end
+  # end
 
 end

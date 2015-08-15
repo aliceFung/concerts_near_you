@@ -5,10 +5,10 @@ class FavoritesController < ApplicationController
 
     if favorite.save
       flash[:success] = "New music favorite added to your list."
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
       flash[:error] = "Save failed. :("
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 
@@ -17,10 +17,10 @@ class FavoritesController < ApplicationController
     favorite = current_user.favorites.find(params[:id])
     if current_user.id == favorite.user_id && favorite.destroy
       flash[:success] = "Deleted from your list"
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
       flash[:error] = "It was not deleted. :("
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 
@@ -28,7 +28,7 @@ class FavoritesController < ApplicationController
 
   def params_list
     params.require(:favorite).permit(:id, :artist_name, :artist_id)
-    params[:artist_name].downcase.strip!
+    params[:favorite][:artist_name].downcase.strip!
   end
 
 

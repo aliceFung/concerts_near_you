@@ -1,0 +1,5 @@
+<div class="list-group-item">
+<%= link_to favorite.artist.name,
+    search_path(artist: favorite.artist.name) %>
+<%= link_to "Delete", favorite_path(favorite), method: :delete, class: "pull-right" %>
+</div>
