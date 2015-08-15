@@ -5,10 +5,10 @@ class LocationsController < ApplicationController
 
     if @location.save
       flash[:success] = "New location created"
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
       flash[:error] = "Location wasn't saved. :("
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 
@@ -17,10 +17,10 @@ class LocationsController < ApplicationController
     @location = current_user.locations.find(params[:id])
     if current_user.id == @location.user_id && @location.destroy
       flash[:success] = "Location deleted"
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
       flash[:error] = "Location not updated. :("
-      redirect to user_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 

@@ -12,14 +12,19 @@ class ProfilesController < ApplicationController
 
   def update
     @profile = current_user.profile
-    if @profile.update(whitelisted_user_params)
+    current_user.email = params[:profile][:email]
+    if @profile.update(whitelisted_user_params) && current_user.save
       flash[:success] = "Successfully updated your profile"
-      redirect_to user_profile_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
-      flash.now[:failure] = "Failed to update your profile"
-      render :edit
+      flash[:failure] = "Failed to update your profile"
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 
+  private
 
+  def whitelisted_user_params
+    params.require(:profile).permit(:id, :email, :frequency)
+  end
 end
