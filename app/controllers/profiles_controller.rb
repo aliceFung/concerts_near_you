@@ -14,10 +14,10 @@ class ProfilesController < ApplicationController
     @profile = current_user.profile
     if @profile.update(whitelisted_user_params)
       flash[:success] = "Successfully updated your profile"
-      redirect_to user_profile_path(current_user)
+      redirect_to profile_path(current_user.profile.id)
     else
-      flash.now[:failure] = "Failed to update your profile"
-      render :edit
+      flash[:failure] = "Failed to update your profile"
+      redirect_to profile_path(current_user.profile.id)
     end
   end
 
