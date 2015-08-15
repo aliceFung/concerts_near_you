@@ -1,7 +1,7 @@
 class Event
 
   attr_reader :lat, :lon, :artist, :description, :venue, :datetime
-                  
+
   def initialize(lat,lon, artist, description, venue, datetime)
     @lat = lat
     @lon = lon

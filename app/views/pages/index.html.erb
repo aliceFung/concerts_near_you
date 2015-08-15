@@ -26,7 +26,7 @@
   <div class="col-sm-12">
     <h3 class="text-center">
       Showing <%= @events.size if @events %> results
-      <%= "for #{params[:artist]} near #{params[:address]}" %>
+      <%= "for #{@artist} near #{@origin}" %>
     </h3>
   </div>
   <div class="col-sm-8 col-sm-offset-2">
@@ -35,7 +35,7 @@
     </div>
   </div>
 </div>
-<br>  
+<br>
 <br>
 <script type="text/javascript">
     handler = Gmaps.build('Google');
