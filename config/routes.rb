@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   get 'profile' =>  'profiles#index'
   devise_for :users
   get '/pages/about' => 'pages#about'
@@ -7,6 +7,6 @@ Rails.application.routes.draw do
 
   resources :searches, only: [:index]
 
-  resources :locations
+  resources :locations, only: [:create, :destroy]
 
 end
