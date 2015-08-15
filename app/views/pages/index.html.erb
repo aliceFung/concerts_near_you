@@ -24,17 +24,6 @@
     <%= "for #{params[:artist]} near #{params[:address]}" %>
   </h3>
 
-<!-- events list -->
-   <% @events.each do |event| %>
-     <br>
-     Artist <%=  event["artists"][0]["name"]%>
-     <br>
-     Where <%= event["venue"]["name"] %>
-     <br>
-     When <%= event["formatted_datetime"] %>
-    <br>
-     What <%= event["description"] %>
-   <% end %>
 
   <br>
 

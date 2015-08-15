@@ -1,26 +1,30 @@
 class PagesController < ApplicationController
 
+ 
   def index
     if current_user
+      #Need to be refactored into Event model
       @events = MapList.user_interest_events
     else
-      @origin = params[:address]
+      #Alice please redo to default location or location by IP if no params
+      params[:address].nil? ? @origin = 'New York' : @origin = params[:address]
       @origin ||= address_from_ip
-      @events = BandEvent.new(params[:artist], @origin).all
-      @hash = MapList.map_markers(@events)
-      # @hash = MapList.no_event_location(params[:address]) if @events.empty?
+      #First option
+      params[:artist].nil? ? artist = 'Madonna' : artist = params[:artist]
+      @events = Bands.new(artist, @origin).events
+      #Second option @events = Last.new('New York').events
+
+      @hash = Gmaps4rails.build_markers(@events) do |event, marker|
+        marker.lat  event.lat
+        marker.lng  event.lon 
+        marker.infowindow event.artist + '<br>' + 
+                          'Where: ' + event.venue + '<br>' +
+                          'What: ' + event.description + '<br>' + 
+                          'When: ' + event.datetime
+      end
     end
   end
 
-  # don't need this. just redirect to index with get request again
-  # def create
-  #   #grab a query from search form,
-  #   # => if no location given grab geo location, if not found set default New York
-  #   # => if no name specified give a 'Madonna' name for now we can't grab all events for a location
-  #   #if no events found show "No event for this artist in this area are known"
-  #   #put query into params for obj Bands see line 5
-  #   #redirect_to root
-  # end
 
   private
 

@@ -19,7 +19,8 @@ class User < ActiveRecord::Base
       current_user.locations.each do |location|
 
         current_user.artists.each do |artist|
-         events += BandEvent.new(artist, location).all
+          #Need to add events from Last too
+         events += Bands.new(artist, location).events
         end
 
       end

@@ -10,6 +10,9 @@ gem 'httparty'
 gem 'gmaps4rails'
 gem 'geocoder'
 
+#To store keys 
+gem 'figaro'
+
 #Authorization for users
 gem 'devise'
 gem "font-awesome-rails"

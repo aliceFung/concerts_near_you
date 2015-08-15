@@ -16,12 +16,13 @@ Favorite.destroy_all
 
 MULTIPLIER.times do |i|
   User.create( email: "email#{i}.gmail.com",
-                password: "password"
+                password: "password",
                 password_confirmation: "password")
-  Artist.create (name: "artist#{i}")
+
+  Artist.create(name: "artist#{i}")
 end
 
-users = User.all
-artists = Artist.all
+# users = User.all
+# artists = Artist.all
 
 # MULTIPLIER.times do |i|
