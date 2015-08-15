@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(version: 20150815002434) do
 
+  create_table "artists", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
@@ -22,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150815002434) do
 
   add_index "conversations", ["recipient_id"], name: "index_conversations_on_recipient_id"
   add_index "conversations", ["sender_id"], name: "index_conversations_on_sender_id"
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "identities", force: :cascade do |t|
     t.integer  "user_id"
