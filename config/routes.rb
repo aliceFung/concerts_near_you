@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   resources :locations, only: [:create, :destroy]
 
   resource :search, only: [:show]
+  resources :artists, only: [:create, :destroy]
+  resources :favorites, only: [:create, :destroy]
 
 end
