@@ -11,15 +11,20 @@ class Last
   
   def events
     events = []
-    self.response_json["events"]["event"].each do |event|
-      lat = event["venue"]["location"]["geo:point"]["geo:lat"]
-      lon = event["venue"]["location"]["geo:point"]["geo:long"]
-      artist = event["artists"]["artist"]
-      venue = event["venue"]["name"]
-      description = event["title"]
-      datetime = event["startDate"]
+    if self.response_json["error"].nil?
+      self.response_json["events"]["event"].each do |event|
+        lat = event["venue"]["location"]["geo:point"]["geo:lat"]
+        lon = event["venue"]["location"]["geo:point"]["geo:long"]
+        artist = event["artists"]["artist"]
+        venue = event["venue"]["name"]
+        description = event["title"]
+        datetime = event["startDate"]
 
-      events << Event.new(lat,lon,artist,description,venue,datetime)
+        events << Event.new(lat,lon,artist,description,venue,datetime)
+      end
+    else
+      events << "error"
+      events << self.response_json["message"]
     end
     events
   end

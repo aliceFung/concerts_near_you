@@ -17,7 +17,13 @@ class PagesController < ApplicationController
         #First option
         @events = Bands.new(@artist, @origin).events
       end
-      @hash = MapList.map_markers(@events)
+      #When API return errors messages
+      if @events[0]=="error" #work for Last.new(@origin)
+        flash[:failure]=@events[1]
+        @hash = MapList.no_results
+      else
+        @hash = MapList.map_markers(@events)
+      end
     end
   end
 
