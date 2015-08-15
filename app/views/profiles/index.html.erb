@@ -78,29 +78,12 @@
 
       <div class="col-sm-8 col-sm-offset-2">
 
-      <% @events.each do |event| %>
-
 
       <br>
       <br>
 
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <h3 class="panel-title">   Artist <%=  event.artist%></h3>
-        </div>
-        <div class="panel-body">
-
-         <br>
-         Where <%= event.venue %>
-         <br>
-         When <%= event.datetime %>
-         <br>
-         What <%= event.description %>
-
-       </div>
-     </div>
-     <% end %>
+      <%= render partial: 'shared/events', locals:{events: @events}%>
      </div>
    </div>
  </div>

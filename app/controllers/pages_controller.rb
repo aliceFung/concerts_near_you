@@ -27,18 +27,18 @@ class PagesController < ApplicationController
     end
   end
 
-  def show
-    @origin = address_for_query
-    @artist = params[:artist] #if nil, default set in Bands.rb
-    if @artist.blank?
-      #Second option
-      @events = Last.new(@origin).events
-    else
-      #First option
-      @events = Bands.new(@artist, @origin).events
-    end
-    @hash = MapList.map_markers(@events)
-  end
+  # def show
+  #   @origin = address_for_query
+  #   @artist = params[:artist] #if nil, default set in Bands.rb
+  #   if @artist.blank?
+  #     #Second option
+  #     @events = Last.new(@origin).events
+  #   else
+  #     #First option
+  #     @events = Bands.new(@artist, @origin).events
+  #   end
+  #   @hash = MapList.map_markers(@events)
+  # end
 
   private
 
