@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   #=================== associations ======================
 
   has_many :locations
+  has_one :profile
   has_many :favorites
   has_many :artists, through: :favorites
 
@@ -25,5 +26,8 @@ class User < ActiveRecord::Base
     end
     events
   end
+
+
+
 
 end

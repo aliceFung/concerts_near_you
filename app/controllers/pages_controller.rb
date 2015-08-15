@@ -11,6 +11,7 @@ class PagesController < ApplicationController
     end
   end
 
+  # don't need this. just redirect to index with get request again
   # def create
   #   #grab a query from search form,
   #   # => if no location given grab geo location, if not found set default New York
