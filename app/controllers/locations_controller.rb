@@ -25,13 +25,13 @@ class LocationsController < ApplicationController
 
   ## REMOVE THESE WHEN WE'RE SURE WE DON'T NEED IT ANYMORE
 
-  def new
-    @location = current_user.locations.build
-  end
+  # def new
+  #   @location = current_user.locations.build
+  # end
 
-  def index
-    @locations = Location.all
-  end
+  # def index
+  #   @locations = Location.all
+  # end
 
   # def show
   #   if params[:location].present?

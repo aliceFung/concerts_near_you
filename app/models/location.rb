@@ -25,5 +25,12 @@ class Location < ActiveRecord::Base
 
   #============== methods ===============
 
+  # def all_artist_events
+  #   list=[]
+  #   current_user.artists.each do |artist|
+  #     list += BandEvent.new(artist, self.address).all
+  #   end
+  # end
+
 
 end

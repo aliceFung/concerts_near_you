@@ -6,9 +6,9 @@ class BandEvent
 
   attr_accessor :name, :location
 
-  def initialize(name, location)
-    @name = name
-    @location = location
+  def initialize(name , location)
+    name ||= "Madonna"
+    location ||= "New York"
     #@options = { :query => { :name => name} }
     #For artist by name search
     #response_row = HTTParty.get("http://api.bandsintown.com/artists/#{name}.json?api_version=2.0&app_id=practice")
